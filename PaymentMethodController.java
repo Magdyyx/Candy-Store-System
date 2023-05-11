@@ -2,7 +2,8 @@ import java.util.List;
 
 public class PaymentMethodController {
 
-    public void processPayment(Order order, user user, List<GiftVoucher> vouchers, int loyaltyPoints, PaymentMethod paymentMethod, float cashAmount) {
+    public void processPayment(order order, User user, List<GiftVoucher> vouchers, int loyaltyPoints,
+            PaymentMethod paymentMethod, float cashAmount) {
         float totalAmount = order.getTotalAmount();
         float remainingAmount = totalAmount;
 
@@ -27,7 +28,7 @@ public class PaymentMethodController {
         }
 
         // 3) Pay remaining amount via payment method
-        switch (paymentMethod.getType()) {
+        switch (paymentMethod.getMethodType()) {
             case "Smart Wallet":
                 SmartWallet smartWallet = (SmartWallet) paymentMethod;
                 if (smartWallet.checkBalance(remainingAmount)) {

@@ -7,14 +7,14 @@ public class OrderController {
     private Database database;
 
     public OrderController(CatalogController catalogController, CartController cartController,
-                           AuthenticationController authController, Database database) {
+            AuthenticationController authController, Database database) {
         this.catalogController = catalogController;
         this.cartController = cartController;
         this.authController = authController;
         this.database = database;
     }
 
-    public Order placeOrder(int userId, String shippingAddress, PaymentMethod paymentMethod) throws Exception {
+    public order placeOrder(int userId, String shippingAddress, PaymentMethod paymentMethod) throws Exception {
         // Check if the user is logged in and has items in their cart
         if (!authController.isUserLoggedIn(userId)) {
             throw new Exception("User is not logged in");
@@ -36,7 +36,7 @@ public class OrderController {
         }
 
         // Check if the user has enough loyalty points to place the order
-        user user = authController.getUserById(userId);
+        User user = authController.getUserById(userId);
         int loyaltyPoints = user.getLoyaltyPoints();
         if (loyaltyPoints > 0) {
             int loyaltyPointsToUse = Math.min(loyaltyPoints, (int) totalPrice);
@@ -54,7 +54,7 @@ public class OrderController {
         }
 
         // Create the order
-        Order order = new Order(cartItems, shippingAddress, paymentMethod, totalPrice);
+        order order = new Order(cartItems, shippingAddress, paymentMethod, totalPrice);
         database.addOrder(order);
 
         // Clear the user's cart
@@ -68,7 +68,7 @@ public class OrderController {
         if (!authController.isUserLoggedIn(userId)) {
             throw new Exception("User is not logged in");
         }
-        Order order = database.getOrderById(orderId);
+        order order = database.getOrderById(orderId);
         if (order == null || order.getUser().getId() != userId) {
             throw new Exception("Order not found");
         }
@@ -78,7 +78,7 @@ public class OrderController {
         database.updateOrder(order);
     }
 
-    public List<Order> getOrderHistory(int userId) throws Exception {
+    public List<order> getOrderHistory(int userId) throws Exception {
         // Check if the user is logged in
         if (!authController.isUserLoggedIn(userId)) {
             throw new Exception("User is not logged in");

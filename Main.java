@@ -1,7 +1,7 @@
 import java.util.*;
 import javax.swing.JOptionPane;
 
-public class Main {
+public class main {
     public static void main(String[] args) {
 
     }

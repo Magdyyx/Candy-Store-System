@@ -1,46 +1,46 @@
 import java.util.*;
 
 public class Database {
-    private List<user> users;
-    private catalog catalog;
-    private List<Order> orders;
+    private List<User> users;
+    private Catalog catalog;
+    private List<order> orders;
     private List<GiftVoucher> vouchers;
-    
+
     public Database() {
-        users = new ArrayList<user>();
-        catalog = new catalog();
-        orders = new ArrayList<Order>();
+        users = new ArrayList<User>();
+        catalog = new Catalog();
+        orders = new ArrayList<order>();
         vouchers = new ArrayList<GiftVoucher>();
     }
-    
-    public void addUser(user user) {
+
+    public void addUser(User user) {
         users.add(user);
     }
-    
-    public void removeUser(user user) {
+
+    public void removeUser(User user) {
         users.remove(user);
     }
-    
-    public List<user> getUsers() {
+
+    public List<User> getUsers() {
         return users;
     }
-    
-    public catalog getCatalog() {
+
+    public Catalog getCatalog() {
         return catalog;
     }
-    
-    public void addOrder(Order order) {
+
+    public void addOrder(order order) {
         orders.add(order);
     }
-    
-    public List<Order> getOrders() {
+
+    public List<order> getOrders() {
         return orders;
     }
-    
+
     public void addVoucher(GiftVoucher voucher) {
         vouchers.add(voucher);
     }
-    
+
     public List<GiftVoucher> getVouchers() {
         return vouchers;
     }

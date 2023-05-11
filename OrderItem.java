@@ -1,18 +1,18 @@
 
 public class OrderItem {
-    private item item;
+    private Item item;
     private int quantity;
 
-    public OrderItem(item item, int quantity) {
+    public OrderItem(Item item, int quantity) {
         this.item = item;
         this.quantity = quantity;
     }
 
-    public item getItem() {
+    public Item getItem() {
         return item;
     }
 
-    public void setItem(item item) {
+    public void setItem(Item item) {
         this.item = item;
     }
 

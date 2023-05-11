@@ -1,4 +1,4 @@
-public class PaymentMethod {
+public abstract class PaymentMethod {
     private String methodType;
 
     public PaymentMethod(String methodType) {
@@ -12,4 +12,8 @@ public class PaymentMethod {
     public void setMethodType(String methodType) {
         this.methodType = methodType;
     }
+
+    public abstract boolean checkBalance(float amount);
+
+    public abstract void makePayment(float amount);
 }

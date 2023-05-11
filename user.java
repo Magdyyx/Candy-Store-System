@@ -1,17 +1,18 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class user {
+public class User {
     private String email;
     private String password;
     private String address;
     private int loyaltyPoints;
     private List<GiftVoucher> giftVouchers;
-    private List<Order> orders;
+    private List<order> orders;
     private List<OrderItem> cart;
+    private LoyaltyPointsScheme loyaltyPointsScheme;
     private boolean accountStatus;
 
-    public user(String email, String password, String address) {
+    public User(String email, String password, String address) {
         this.email = email;
         this.password = password;
         this.address = address;
@@ -20,6 +21,14 @@ public class user {
         this.orders = new ArrayList<>();
         this.cart = new ArrayList<>();
         this.accountStatus = false;
+    }
+
+    public LoyaltyPointsScheme getLoyaltyPointsScheme() {
+        return loyaltyPointsScheme;
+    }
+
+    public void setLoyaltyPointsScheme(LoyaltyPointsScheme loyaltyPointsScheme) {
+        this.loyaltyPointsScheme = loyaltyPointsScheme;
     }
 
     public String getEmail() {
@@ -42,7 +51,7 @@ public class user {
         return giftVouchers;
     }
 
-    public List<Order> getOrders() {
+    public List<order> getOrders() {
         return orders;
     }
 
@@ -62,11 +71,15 @@ public class user {
         this.loyaltyPoints += points;
     }
 
+    public void decreaseLoyaltyPoints(int points) {
+        this.loyaltyPoints -= points;
+    }
+
     public void addGiftVoucher(GiftVoucher giftVoucher) {
         this.giftVouchers.add(giftVoucher);
     }
 
-    public void addOrder(Order order) {
+    public void addOrder(order order) {
         this.orders.add(order);
     }
 
@@ -76,5 +89,9 @@ public class user {
 
     public void removeItemFromCart(OrderItem cartItem) {
         this.cart.remove(cartItem);
+    }
+
+    public void setLoyaltyPoints(int points) {
+        setLoyaltyPoints(points);
     }
 }

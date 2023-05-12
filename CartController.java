@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class CartController {
-    private Map<Integer, List<OrderItem>> userCarts;
+    private static Map<Integer, List<OrderItem>> userCarts;
 
     public CartController() {
         userCarts = new HashMap<>();
@@ -65,4 +65,25 @@ public class CartController {
     public List<OrderItem> getUserCart(int userId) {
         return userCarts.getOrDefault(userId, new ArrayList<>());
     }
+    public static List<Item> getCartItems(int id) {
+        List<Item> items = new ArrayList<>();
+        List<OrderItem> cart = userCarts.get(id);
+        if (cart == null) {
+            return items;
+        }
+        for (OrderItem cartItem : cart) {
+            items.add(cartItem.getItem());
+        }
+        return items;
+    }
+
+    public static float calculateCartTotal(List<Item> itemsInCart) {
+        float total = 0;
+        for (Item item : itemsInCart) {
+            total += item.getPrice();
+        }
+        return total;
+        
+    }
+   
 }

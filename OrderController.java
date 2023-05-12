@@ -19,11 +19,11 @@ public class OrderController {
         if (!authController.isUserLoggedIn(userId)) {
             throw new Exception("User is not logged in");
         }
-        List<OrderItem> cartItems = cartController.getCartItems(userId);
+        List<Item> cartItems = CartController.getCartItems(userId);
         if (cartItems.isEmpty()) {
             throw new Exception("Cart is empty");
         }
-
+        
         // Check if the shipping address is valid
         if (shippingAddress == null || shippingAddress.isEmpty()) {
             throw new Exception("Invalid shipping address");
@@ -31,7 +31,7 @@ public class OrderController {
 
         // Calculate the total price of the order
         float totalPrice = 0;
-        for (OrderItem item : cartItems) {
+        for (Item item : cartItems) {
             totalPrice += item.getItem().getPrice() * item.getQuantity();
         }
 
@@ -54,7 +54,7 @@ public class OrderController {
         }
 
         // Create the order
-        order order = new Order(cartItems, shippingAddress, paymentMethod, totalPrice);
+        order order = new order(cartItems, shippingAddress, paymentMethod, totalPrice);
         database.addOrder(order);
 
         // Clear the user's cart
@@ -69,13 +69,16 @@ public class OrderController {
             throw new Exception("User is not logged in");
         }
         order order = database.getOrderById(orderId);
-        if (order == null || order.getUser().getId() != userId) {
+        order.getUser();
+        if (order == null || User.getId() != userId) {
             throw new Exception("Order not found");
         }
 
         // Cancel the order
-        order.setStatus(OrderStatus.CANCELLED);
+        order.setOrderStatus("Cancelled");
+        order.setPaymentStatus("Refunded");
         database.updateOrder(order);
+        
     }
 
     public List<order> getOrderHistory(int userId) throws Exception {

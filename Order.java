@@ -24,6 +24,33 @@ public class order {
         this.appliedVouchers = new ArrayList<>();
     }
 
+    public order(List<Item> cartItems, String shippingAddress2, PaymentMethod paymentMethod2, float totalPrice) {
+        // Create an OrderItem for each item in the cart
+        List<OrderItem> orderItems = new ArrayList<>();
+        for (Item item : cartItems) {
+            OrderItem orderItem = new OrderItem(item, 1);
+            orderItems.add(orderItem);
+        }
+    
+        // Set the properties of the order
+        this.orderId = generateOrderId();
+        this.userId = User.getId();
+        this.orderItems = orderItems;
+        this.shippingAddress = shippingAddress2;
+        this.paymentMethod = paymentMethod2;
+        this.orderStatus = "Placed";
+        this.paymentStatus = "Pending";
+        this.totalAmount = totalPrice;
+        this.appliedVouchers = new ArrayList<>();
+    }
+    
+    private int generateOrderId() {
+        // Generate a random integer between 100000 and 999999
+        return (int) (Math.random() * (999999 - 100000 + 1) + 100000);
+    }
+    
+    
+
     public void setPaymentStatus(String paymentStatus) {
         this.paymentStatus = paymentStatus;
     }

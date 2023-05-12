@@ -6,10 +6,12 @@ public class Catalog {
     private List<Category> categories;
     private int loyaltyPointsScheme;
     private float loyaltyPointsDiscount;
+    private List<GiftVoucher> giftVouchers;
 
     public Catalog() {
         this.items = new ArrayList<>();
         this.categories = new ArrayList<>();
+        this.giftVouchers = new ArrayList<>();
     }
 
     public List<Item> getItems() {
@@ -58,5 +60,48 @@ public class Catalog {
 
     public float getLoyaltyPointsDiscount() {
         return loyaltyPointsDiscount;
+    }
+
+    public void remove_item(Item item) {
+        items.remove(item);
+    }
+
+    public void updateItemInfo(Item item) {
+        for (int i = 0; i < items.size(); i++) {
+            Item currentItem = items.get(i);
+            if (currentItem.getId() == item.getId()) {
+                // Update the item's information
+                currentItem.setName(item.getName());
+                currentItem.setBrand(item.getBrand());
+                currentItem.setCategory(item.getCategory());
+                currentItem.setPrice(item.getPrice());
+                currentItem.setQuantity(item.getQuantity());
+                break;
+            }
+        }
+    }
+
+    public void cancel_item(Item item) {
+        for (int i = 0; i < items.size(); i++) {
+            Item currentItem = items.get(i);
+            if (currentItem.getId() == item.getId()) {
+                // Update the item's information
+                currentItem.setQuantity(0);
+                break;
+            }
+        }
+    }
+
+    public void addGiftVoucher(GiftVoucher voucher) {
+        this.giftVouchers.add(voucher);
+    }
+
+    public GiftVoucher getGiftVoucherByCode(String voucherCode) {
+        for (GiftVoucher voucher : giftVouchers) {
+            if (voucher.getCode().equals(voucherCode)) {
+                return voucher;
+            }
+        }
+        return null;
     }
 }

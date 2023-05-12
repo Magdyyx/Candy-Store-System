@@ -1,29 +1,29 @@
 import java.util.List;
 
 public class AdminController {
-    private catalog catalog;
-    private List<Order> orders;
+    private Catalog catalog;
+    private List<order> orders;
     private LoyaltyPointsScheme loyaltyPointsScheme;
 
-    public AdminController(catalog catalog, List<Order> orders, LoyaltyPointsScheme loyaltyPointsScheme) {
+    public AdminController(Catalog catalog, List<order> orders, LoyaltyPointsScheme loyaltyPointsScheme) {
         this.catalog = catalog;
         this.orders = orders;
         this.loyaltyPointsScheme = loyaltyPointsScheme;
     }
 
-    public void add_item(item item) {
-        catalog.add_item(item);
+    public void add_item(Item item) {
+        catalog.addItem(item);
     }
 
-    public void remove_item(item item) {
+    public void remove_item(Item item) {
         catalog.remove_item(item);
     }
 
-    public void update_item_info(item item) {
-        catalog.update_item_info(item);
+    public void update_item_info(Item item) {
+        catalog.updateItemInfo(item);
     }
 
-    public void cancel_item(item item) {
+    public void cancel_item(Item item) {
         catalog.cancel_item(item);
     }
 
@@ -31,15 +31,15 @@ public class AdminController {
         this.loyaltyPointsScheme = loyaltyPointsScheme;
     }
 
-    public void suspend_user(user user) {
+    public void suspend_user(User user) {
         user.suspend();
     }
 
-    public List<Order> get_orders() {
+    public List<order> get_orders() {
         return orders;
     }
 
     public void view_statistics() {
-        // TODO: implement statistics view
+
     }
 }

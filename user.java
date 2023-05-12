@@ -11,6 +11,8 @@ public class User {
     private List<OrderItem> cart;
     private LoyaltyPointsScheme loyaltyPointsScheme;
     private boolean accountStatus;
+    private String otp;
+    private static int id;
 
     public User(String email, String password, String address) {
         this.email = email;
@@ -22,6 +24,14 @@ public class User {
         this.cart = new ArrayList<>();
         this.accountStatus = false;
     }
+    public User(int id, String email, String password, String address, String otp) {
+        User.id = id;
+        this.email = email;
+        this.password = password;
+        this.address = address;
+        this.otp = otp;
+    }
+    
 
     public LoyaltyPointsScheme getLoyaltyPointsScheme() {
         return loyaltyPointsScheme;
@@ -94,4 +104,19 @@ public class User {
     public void setLoyaltyPoints(int points) {
         setLoyaltyPoints(points);
     }
+    public static int getId() {
+        return id;
+    }
+    public String getOtp() {
+        return otp;
+    }
+    public void setPassword(String password2) {
+        this.password = password2;
+    
+    }
+    public void suspend() {
+        this.accountStatus = false;
+    
+    }
+    
 }

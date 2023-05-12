@@ -44,4 +44,34 @@ public class Database {
     public List<GiftVoucher> getVouchers() {
         return vouchers;
     }
+
+    public order getOrderById(int orderId) {
+        for (order order : orders) {
+            if (order.getOrderId() == orderId) {
+                return order;
+            }
+        }
+        return null;
+        
+    }
+
+    public void updateOrder(order order) {
+        for (int i = 0; i < orders.size(); i++) {
+            if (orders.get(i).getOrderId() == order.getOrderId()) {
+                orders.set(i, order);
+                break;
+            }
+        }
+    }
+
+    public List<order> getOrdersByUserId(int userId) {
+        List<order> ordersByUser = new ArrayList<>();
+        for (order order : orders) {
+            if (order.getUserId() == userId) {
+                ordersByUser.add(order);
+            }
+        }
+        return ordersByUser;
+        
+    }
 }

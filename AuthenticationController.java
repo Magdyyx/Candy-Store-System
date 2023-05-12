@@ -3,8 +3,8 @@ import java.util.Map;
 
 public class AuthenticationController {
 
-    private final Map<String, user> usersByEmail;
-    private final Map<Integer, user> loggedInUsersById;
+    private final Map<String, User> usersByEmail;
+    private final Map<Integer, User> loggedInUsersById;
     private int nextUserId;
 
     public AuthenticationController() {
@@ -13,7 +13,7 @@ public class AuthenticationController {
         nextUserId = 1;
     }
 
-    public user registerUser(String email, String password, String address) throws Exception {
+    public User registerUser(String email, String password, String address) throws Exception {
         if (usersByEmail.containsKey(email)) {
             throw new Exception("User with email " + email + " already exists.");
         }
@@ -25,14 +25,14 @@ public class AuthenticationController {
 
         String otp = sendOTP(email);
 
-        user newUser = new user(nextUserId++, email, password, address, otp);
+        User newUser = new User(nextUserId++, email, password, address, otp);
         usersByEmail.put(email, newUser);
 
         return newUser;
     }
 
-    public user login(String email, String password) throws Exception {
-        user user = usersByEmail.get(email);
+    public User login(String email, String password) throws Exception {
+        User user = usersByEmail.get(email);
 
         if (user == null) {
             throw new Exception("User with email " + email + " does not exist.");
@@ -52,7 +52,7 @@ public class AuthenticationController {
     }
 
     public void logout(int userId) throws Exception {
-        user user = loggedInUsersById.get(userId);
+        User user = loggedInUsersById.get(userId);
 
         if (user == null) {
             throw new Exception("User with ID " + userId + " is not logged in.");
@@ -67,7 +67,7 @@ public class AuthenticationController {
     }
 
     public boolean verifyOTP(String email, String otp) {
-        user user = usersByEmail.get(email);
+        User user = usersByEmail.get(email);
 
         if (user == null) {
             return false;
@@ -77,7 +77,7 @@ public class AuthenticationController {
     }
 
     public void resetPassword(String email, String password) throws Exception {
-        user user = usersByEmail.get(email);
+        User user = usersByEmail.get(email);
 
         if (user == null) {
             throw new Exception("User with email " + email + " does not exist.");
@@ -95,4 +95,20 @@ public class AuthenticationController {
         // implementation for checking if password is secure
         return password.matches("(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}");
     }
+
+    public boolean isUserLoggedIn(int userId) {
+        
+        return loggedInUsersById.containsKey(userId);
+        
+    }
+
+    public User getUserById(int userId) {
+        return loggedInUsersById.get(userId);
+    }
+
+    public void updateLoyaltyPoints(int userId, int i) {
+        User user = loggedInUsersById.get(userId);
+        user.setLoyaltyPoints(i);
+    }
+
 }
